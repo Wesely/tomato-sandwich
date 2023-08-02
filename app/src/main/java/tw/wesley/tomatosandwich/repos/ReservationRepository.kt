@@ -4,6 +4,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import tw.wesley.tomatosandwich.model.Reservation
 import tw.wesley.tomatosandwich.model.TimeSlot
+import tw.wesley.tomatosandwich.repos.IReservationRepository.Companion.INIT_TIME_SLOTS
 import java.util.SortedSet
 
 /**
@@ -36,14 +37,4 @@ class ReservationRepository : IReservationRepository {
         return availableTimeSlotsList
     }
 
-    companion object {
-        val INIT_TIME_SLOTS: List<TimeSlot> = mutableListOf<TimeSlot>().apply {
-            for (hh in 15..21) {
-                for (mm in listOf(0, 15, 30, 45)) {
-                    this.add(TimeSlot(hh * 100 + mm))
-                }
-            }
-            this.add(TimeSlot(2200))
-        }
-    }
 }

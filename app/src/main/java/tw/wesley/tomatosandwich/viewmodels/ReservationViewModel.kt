@@ -1,6 +1,5 @@
 package tw.wesley.tomatosandwich.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -31,7 +30,6 @@ class ReservationViewModel @Inject constructor(
     }
 
     fun addReservation(reservation: Reservation): Boolean {
-        Log.d("adding resetvation", reservation.toString())
         return reservationRepository.addReservation(reservation)
     }
 }
