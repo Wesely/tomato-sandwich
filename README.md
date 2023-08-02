@@ -18,5 +18,6 @@
 ## Misc
 
 - Use delegate for viewModel `private val reservationViewModel: ReservationViewModel by viewModels()`
-    - It's said that this delegate would bind your viewModel properly with the Activity's lifecycle.
-- There's no way to cancel the appointment but close the app :rofl
+  - It's said that this delegate would bind your viewModel properly with the Activity's lifecycle.
+- There's no way to cancel the appointment, oh wait, they can close the app :rofl
+- Looked into `attr` and picked some colors as Theme. But not gonna check if it's working properly this time, haha.

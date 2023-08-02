@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Add your existing colors here -->
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="ketchup">#DC6D6D</color>
     <color name="lettuce">#70D681</color>
+    <color name="rottenLettuce">#429F52</color>
+
+    <!-- Material Theme colors (lighter versions) -->
+    <color name="colorPrimary">@color/lettuce</color>
+    <color name="colorPrimaryDark">@color/rottenLettuce</color>
+    <color name="colorAccent">@color/ketchup</color>
+    <color name="colorControlNormal">#FFCCCC</color>
+    <color name="colorControlActivated">#B3FFB3</color>
+    <color name="colorControlHighlight">#CCCCFF</color>
+    <color name="colorButtonNormal">#FFECB3</color>
+    <color name="colorSwitchThumbNormal">#64B5F6</color>
+    <color name="controlBackground">@color/black</color>
+    <color name="colorBackgroundFloating">#FFAB91</color>
 </resources>

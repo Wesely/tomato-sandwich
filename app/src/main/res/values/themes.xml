@@ -1,8 +1,17 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.TomatoSandwich" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorControlNormal</item>
+        <item name="colorControlActivated">@color/colorControlActivated</item>
+        <item name="colorControlHighlight">@color/colorControlHighlight</item>
+        <item name="colorButtonNormal">@color/colorButtonNormal</item>
+        <item name="colorSwitchThumbNormal">@color/colorSwitchThumbNormal</item>
+        <item name="controlBackground">@color/controlBackground</item>
+        <item name="colorBackgroundFloating">@color/colorBackgroundFloating</item>
     </style>
 
     <style name="Theme.TomatoSandwich" parent="Base.Theme.TomatoSandwich" />
