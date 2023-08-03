@@ -12,6 +12,6 @@ class ReservationViewModel @Inject constructor(
     private val reservationRepository: IReservationRepository
 ) : ViewModel() {
 
-    val reservationFlow: Flow<Set<Reservation>> = reservationRepository.getReservationsFlow()
+    val reservationFlow: Flow<List<Reservation>> = reservationRepository.getReservationsFlow()
 
 }

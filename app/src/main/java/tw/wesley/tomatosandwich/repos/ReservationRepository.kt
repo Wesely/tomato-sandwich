@@ -13,21 +13,21 @@ import java.util.SortedSet
 class ReservationRepository : IReservationRepository {
 
     private var _reservations: SortedSet<Reservation> = sortedSetOf()
-    private var _reservationsFlow = MutableStateFlow<Set<Reservation>>(_reservations.toSet())
+    private var _reservationsFlow = MutableStateFlow<List<Reservation>>(_reservations.toList())
     private val availableTimeSlotsList: MutableList<TimeSlot> = INIT_TIME_SLOTS.toMutableList()
 
     override fun getReservations(): Set<Reservation> {
         return _reservations
     }
 
-    override fun getReservationsFlow(): Flow<Set<Reservation>> {
+    override fun getReservationsFlow(): Flow<List<Reservation>> {
         return _reservationsFlow
     }
 
     override fun addReservation(reservation: Reservation): Boolean {
         val result = _reservations.add(reservation)
         if (result) {
-            _reservationsFlow.value = _reservations.toSet()
+            _reservationsFlow.value = _reservations.toList()
             availableTimeSlotsList.removeAll { it.isOccupied(reservation.timeSlot) }
         }
         return result

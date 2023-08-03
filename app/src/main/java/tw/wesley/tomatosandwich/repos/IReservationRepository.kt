@@ -10,7 +10,7 @@ import tw.wesley.tomatosandwich.model.TimeSlot
  */
 interface IReservationRepository {
     fun getReservations(): Set<Reservation>
-    fun getReservationsFlow(): Flow<Set<Reservation>>
+    fun getReservationsFlow(): Flow<List<Reservation>>
     fun addReservation(reservation: Reservation): Boolean
     fun getAvailableTimeSlots(): List<TimeSlot>
 

@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import tw.wesley.tomatosandwich.R
@@ -23,6 +25,8 @@ class MainReservationsFragment : Fragment() {
     // Use the shared ViewModel, This property can be accessed only after this Fragment is attached
     private val viewModel: ReservationViewModel by activityViewModels()
 
+    private lateinit var adapter: ReservationItemAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,9 +39,19 @@ class MainReservationsFragment : Fragment() {
             findNavController().navigate(R.id.action_start_create_reservation)
         }
 
+        // Initialize the RecyclerView
+        binding.rvReservationList.layoutManager = LinearLayoutManager(context)
+        adapter = ReservationItemAdapter(mutableListOf())
+        binding.rvReservationList.adapter = adapter
+
         lifecycleScope.launch {
-            viewModel.reservationFlow.collectLatest {
-                Timber.d("subscribe/resvFlow:$it")
+            viewModel.reservationFlow.distinctUntilChanged().collectLatest { reservations ->
+                Timber.d("subscribe/resvFlow:$reservations")
+
+                // Update the RecyclerView adapter
+                adapter.reservations.clear()
+                adapter.reservations.addAll(reservations)
+                adapter.notifyDataSetChanged() // BAD, but ...yeah
             }
         }
 
