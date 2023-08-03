@@ -30,4 +30,16 @@ class MainActivity : AppCompatActivity() {
         // Use navController
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
+
+    override fun onBackPressed() {
+        // if nav at the root screen, close the app directly
+        if (navController.currentDestination?.id == R.id.mainReservationFragment) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }
+
+

@@ -7,6 +7,9 @@
     <string name="select_a_party_size">Select a Party Size</string>
     <string name="guest_details">Guest Details</string>
     <string name="hint_name">Name</string>
-    <string name="hint_notes">Notes</string>
+    <string name="hint_notes">Visit Notes</string>
     <string name="hint_phone">Phone</string>
+    <string name="close">Close</string>
+    <string name="party_size_format">Party size: %d</string>
+    <string name="time_details_format">Time: %s</string>
 </resources>

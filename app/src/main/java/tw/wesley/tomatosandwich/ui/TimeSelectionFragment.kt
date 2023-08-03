@@ -14,6 +14,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import tw.wesley.tomatosandwich.R
 import tw.wesley.tomatosandwich.databinding.FragmentTimeSelectionBinding
+import tw.wesley.tomatosandwich.ui.adadpters.TimeSlotAdapter
 import tw.wesley.tomatosandwich.viewmodels.CreateReservationViewModel
 
 class TimeSelectionFragment : Fragment() {

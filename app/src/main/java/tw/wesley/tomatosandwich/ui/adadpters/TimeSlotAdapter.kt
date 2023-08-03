@@ -1,4 +1,4 @@
-package tw.wesley.tomatosandwich.ui
+package tw.wesley.tomatosandwich.ui.adadpters
 
 import android.view.LayoutInflater
 import android.view.View

@@ -5,56 +5,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import tw.wesley.tomatosandwich.R
+import tw.wesley.tomatosandwich.databinding.FragmentViewDetailsBinding
+import tw.wesley.tomatosandwich.model.Reservation
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ViewDetailsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ViewDetailsFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class ViewDetailsFragment : Fragment() {
+
+    private var _binding: FragmentViewDetailsBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_view_details, container, false)
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ViewDetailsFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ViewDetailsFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    ): View {
+        _binding = FragmentViewDetailsBinding.inflate(inflater, container, false)
+        val reservation = requireArguments().getParcelable<Reservation>("reservation")
+        if (reservation != null) {
+            with(binding) {
+                tvGuestName.text = reservation.guestName
+                tvPartySize.text = getString(R.string.party_size_format, reservation.partySize)
+                tvTime.text = getString(R.string.time_details_format, reservation.timeSlot.toString())
+                tvPhone.text = reservation.phone
+                tvVisitNotes.text = reservation.notes
+                btnClose.setOnClickListener {
+                    findNavController().popBackStack()
                 }
             }
+        }
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

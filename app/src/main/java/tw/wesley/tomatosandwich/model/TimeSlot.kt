@@ -1,12 +1,16 @@
 package tw.wesley.tomatosandwich.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 /**
  * @param time consequntial integers,
  */
+@Parcelize
 data class TimeSlot(
     val time: Int,
     var available: Boolean = true,
-) : Comparable<TimeSlot> {
+) : Comparable<TimeSlot>, Parcelable {
 
     /**
      * @param other: another booked TimeSlot

@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import timber.log.Timber
 import tw.wesley.tomatosandwich.R
 import tw.wesley.tomatosandwich.databinding.FragmentMainBinding
+import tw.wesley.tomatosandwich.ui.adadpters.ReservationItemAdapter
 import tw.wesley.tomatosandwich.viewmodels.ReservationViewModel
 
 class MainReservationsFragment : Fragment() {
@@ -41,7 +42,11 @@ class MainReservationsFragment : Fragment() {
 
         // Initialize the RecyclerView
         binding.rvReservationList.layoutManager = LinearLayoutManager(context)
-        adapter = ReservationItemAdapter(mutableListOf())
+        adapter = ReservationItemAdapter(mutableListOf()) { reservation ->
+            Timber.d("reservation/onClicked: $reservation")
+            val action = MainReservationsFragmentDirections.actionMainFragmentToDetails(reservation)
+            findNavController().navigate(action)
+        }
         binding.rvReservationList.adapter = adapter
 
         lifecycleScope.launch {

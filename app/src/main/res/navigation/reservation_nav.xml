@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,16 +11,24 @@
         <action
             android:id="@+id/action_start_create_reservation"
             app:destination="@id/timeSelectionFragment" />
-        <action
-            android:id="@+id/action_view_details"
-            app:destination="@id/ViewDetailsFragment" />
-    </fragment>
 
+        <action
+            android:id="@+id/actionMainFragmentToDetails"
+            app:destination="@id/ViewDetailsFragment">
+            <argument
+                android:name="reservation"
+                app:argType="tw.wesley.tomatosandwich.model.Reservation" />
+        </action>
+    </fragment>
 
     <fragment
         android:id="@+id/ViewDetailsFragment"
         android:name="tw.wesley.tomatosandwich.ui.ViewDetailsFragment"
-        tools:layout="@layout/fragment_view_details"></fragment>
+        tools:layout="@layout/fragment_view_details">
+        <action
+            android:id="@+id/actionDetailsToMainFragment"
+            app:destination="@id/mainReservationFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/timeSelectionFragment"
@@ -45,7 +52,6 @@
         android:id="@+id/detailsInputFragment"
         android:name="tw.wesley.tomatosandwich.ui.DetailsInputFragment"
         tools:layout="@layout/fragment_details_input">
-
         <action
             android:id="@+id/actionFinishCreateReservation"
             app:destination="@id/mainReservationFragment" />
