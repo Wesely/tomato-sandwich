@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">TomatoSandwich</string>
     <string name="create">Create</string>
+    <string name="save">Save</string>
+    <string name="time_slot_not_available">Not Available</string>
+    <string name="select_a_time">Select a Time</string>
+    <string name="select_a_party_size">Select a Party Size</string>
+    <string name="guest_details">Guest Details</string>
+    <string name="hint_name">Name</string>
+    <string name="hint_notes">Notes</string>
+    <string name="hint_phone">Phone</string>
 </resources>

@@ -25,9 +25,9 @@ data class TimeSlot(
 
     // We're so lucky that the restaurant is not available in the morning.
     // So the time slots are all in PM format.
-    override fun toString(): String {
+    fun toFormattedTimeString(): String {
         val hh = time / 100
         val mm = time % 100
-        return "%2d:%2d".format(hh, mm)
+        return "%02d:%02d".format(hh, mm)
     }
 }

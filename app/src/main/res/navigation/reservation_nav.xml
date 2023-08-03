@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainReservationFragment">
+
+    <fragment
+        android:id="@+id/mainReservationFragment"
+        android:name="tw.wesley.tomatosandwich.ui.MainReservationsFragment"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_start_create_reservation"
+            app:destination="@id/timeSelectionFragment" />
+        <action
+            android:id="@+id/action_view_details"
+            app:destination="@id/ViewDetailsFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/ViewDetailsFragment"
+        android:name="tw.wesley.tomatosandwich.ui.ViewDetailsFragment"
+        tools:layout="@layout/fragment_view_details"></fragment>
+
+    <fragment
+        android:id="@+id/timeSelectionFragment"
+        android:name="tw.wesley.tomatosandwich.ui.TimeSelectionFragment"
+        tools:layout="@layout/fragment_time_selection">
+        <action
+            android:id="@+id/action_time_to_party_size"
+            app:destination="@id/partySizeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/partySizeFragment"
+        android:name="tw.wesley.tomatosandwich.ui.PartySizeSelectionFragment"
+        tools:layout="@layout/fragment_party_size">
+        <action
+            android:id="@+id/action_party_size_to_details"
+            app:destination="@id/detailsInputFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailsInputFragment"
+        android:name="tw.wesley.tomatosandwich.ui.DetailsInputFragment"
+        tools:layout="@layout/fragment_details_input">
+
+        <action
+            android:id="@+id/actionFinishCreateReservation"
+            app:destination="@id/mainReservationFragment" />
+    </fragment>
+</navigation>

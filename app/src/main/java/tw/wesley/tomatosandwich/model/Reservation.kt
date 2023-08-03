@@ -2,11 +2,11 @@ package tw.wesley.tomatosandwich.model
 
 
 data class Reservation(
-    val timeSlot: TimeSlot,
-    val guestName: String,
-    val partySize: Int,
-    val phone: String = "",
-    val notes: String = "",
+    var timeSlot: TimeSlot,  // Step 1
+    var partySize: Int,      // Step 2
+    var guestName: String,   // step 3
+    var phone: String = "",  // step 3
+    var notes: String = "",  // step 3
 ) : Comparable<Reservation> {
 
     /**
