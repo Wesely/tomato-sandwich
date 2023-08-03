@@ -12,7 +12,7 @@ interface IReservationRepository {
     fun getReservations(): Set<Reservation>
     fun getReservationsFlow(): Flow<List<Reservation>>
     fun addReservation(reservation: Reservation): Boolean
-    fun getAvailableTimeSlots(): List<TimeSlot>
+    fun getTimeSlots(): List<TimeSlot>
 
     companion object {
         // This shall be consists even we have another implementation for this interface.

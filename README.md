@@ -1,31 +1,65 @@
-# tomato-sandwich
+# Tomato-Sandwich
+
+Web version of this documentation? Check it out [here](https://gist.github.com/Wesely/9fb49128862abc22603641a78eec64e0).
+
+I use a GitHub project to make my plans. They're not very detailed but I've included previews in each step. Check out the
+project [here](https://github.com/users/Wesely/projects/3/views/1).
+
+I uphold the spirit of "keeping it simple". When encountering complex logic, I skip it for the time being and jot it down in the **Misc** section at the end of this document.
+Sometimes, I opt for a more humorous approach. :)
+ncountering complex logic, I skip it for now and write it down in the **Misc** section at the end of this document.
+And sometimes I chose the more funny one :)
 
 ## Setup
 
-1. Align the Java version that AndroidStudio >> Settings, Search for `Gradle`.
-2. Under `Gradle`, sed the `Gradle JDK` to Java 17 (example: `jbr-17`)
+Example Image: ![Image](https://i.imgur.com/McdsYZo.png)
 
-## Thoughts
+1. Match the Java version in AndroidStudio. Go to Settings and search for `Gradle`.
+2. Under `Gradle`, set the `Gradle JDK` to Java 17 (example: `jbr-17`).
 
-- The time slots need to be sorted
-    - I came up with write them to RoomDB and query them (sorted) as a flow
-    - But for the Simplest Spirit, I'll use `SortedSet<Reservation>` here. Since it shall not duplicate, and needs to be sorted by time, I think it's an interesting choice.
-- Reservations lasts for an hour:
-    - Assume we don't need to clean the table
-    - I think up a funny implementation, which is store the time "03:30 PM" as "Integer(1530)". It would be easy to calculate the time difference.
-- This time I'd like to try Fragments with navigation flow (Main, ViewDetails, SelectTime, PartySize, Details)
-    - they can share a same viewModel or maybe a `Reservation` object
-    - I'll probably gonna make add/get reservation as 2 different viewModel later
-- Wrap Vertical Linearlayout of the detail inputs in a scrollView for some smaller devices.
-    - Because when soft keyboard shows, the screen space is even smaller
-    - Sometimes when we're typing we'd like to scroll a bit, so add trailing space at the bottom of the DetailInput page
+## Basic Architecture
+
+Example Image: ![Image](https://i.imgur.com/PJCiIFt.png)
+
+- This app contains only 1 `Activity` with 5 `Fragment` and managed by `reservation_nav.xml`
+- Data are shared with `ViewModels` between all `Fragment`
+- All `ViewModels` manipulates data through the same `ReservationRepository` instance, injected by `Hilt`
+- All Views, or saying `Fragments` collects or access the immutable data exposed by `ViewModels`
+- So when ever any data is modified, all Fragments can get the same result.
+
+## Thoughts When I'm making decision
+
+Some of them might not used in the end.
+
+- This time, I want to try Fragments with a navigation flow (Main, ViewDetails, SelectTime, PartySize, Details).
+  - They could share the same viewModel or maybe a `Reservation` object.
+  - I'm probably going to add/get reservation as two different viewModels later.
+- The time slots need to be sorted.
+  - I thought about writing them to RoomDB and querying them (sorted) as a flow.
+  - But for simplicity, I'll use `SortedSet<Reservation>` here. Since it can't duplicate and needs to be sorted by time, it's an interesting choice.
+- Reservations last for an hour:
+  - We assume we don't need to clean the table.
+  - I came up with a fun implementation, which is to store the time "03:30 PM" as "Integer(1530)". It would make calculating the time difference easy.
+  - By doing this, I can use `(time - other.time) >= 0 && (time - other.time) <= 85` to check if it's occupied by another reservation. This 85 stands
+    for `1 hour minus 15 minutes => 100 -15 = 85`.
+  - It's tested in `fun testIsOccupiedBy()` and works fine.
+  - The format converter is also simple: `hour = time / 100` `minutes = time % 100`.
+- I wrapped the Vertical LinearLayout of the detail inputs in a scrollView for smaller devices.
+  - Because when the soft keyboard appears, the screen space becomes even smaller.
+  - Sometimes when we're typing we'd like to scroll a bit, so I added trailing space at the bottom of the DetailInput page.
+- The application handles configuration changes (like screen rotation).
+- With `lifecycleScope` we don't need to worry about the recycle in the background. Or we can assign the active lifecycle like `launchWhenResumed` ...which I didn't do.
 
 ## Misc
 
-- Use delegate for viewModel `private val reservationViewModel: ReservationViewModel by viewModels()`
-    - It's said that this delegate would bind your viewModel properly with the Activity's lifecycle.
-- There's no way to cancel the appointment, oh wait, they can close the app :rofl
-- Looked into `attr` and picked some colors as Theme. But not gonna check if it's working properly this time, haha.
-- I should go with `notifyItemRangeChanged()` not `notifyDataSetChanged()`
-- For the PartySize, there are only 5 buttons so I programmatically generate 5 Button and put them into the ScrollView
-- User `Timber.d()` to print logs only on debug builds
+- I used a delegate for the viewModel `private val reservationViewModel: ReservationViewModel by viewModels()`.
+  - It's said that this delegate will bind your viewModel correctly with the Activity's lifecycle.
+- There's no way to cancel the appointment, oh wait, users can close the app :rofl.
+- I looked into `attr` and picked some colors as the theme. But I didn't check if it's working properly this time, haha.
+- I should have used `notifyItemRangeChanged()` instead of `notifyDataSetChanged()`.
+- For the PartySize, there are only 5 buttons so I generated 5 buttons programmatically and put them into the ScrollView.
+- I used `Timber.d()` to print logs only on debug builds.
+- I could have used TextSpan to make the Reservation Details look better, but I didn't.
+- I'm not setting all dimensions to `dimens.xml`.
+- Wanted to import some `viewBinding` delegates so I don't have to clean them up.
+- 

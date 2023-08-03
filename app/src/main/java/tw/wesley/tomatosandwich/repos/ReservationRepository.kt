@@ -12,9 +12,11 @@ import java.util.SortedSet
  */
 class ReservationRepository : IReservationRepository {
 
+    // Reservations stored as sortedSet
+    // Exposed as a fixed list and persists the sorted order.
     private var _reservations: SortedSet<Reservation> = sortedSetOf()
     private var _reservationsFlow = MutableStateFlow<List<Reservation>>(_reservations.toList())
-    private val availableTimeSlotsList: MutableList<TimeSlot> = INIT_TIME_SLOTS.toMutableList()
+    private val timeSlotsList: MutableList<TimeSlot> = INIT_TIME_SLOTS.toMutableList()
 
     override fun getReservations(): Set<Reservation> {
         return _reservations
@@ -28,13 +30,20 @@ class ReservationRepository : IReservationRepository {
         val result = _reservations.add(reservation)
         if (result) {
             _reservationsFlow.value = _reservations.toList()
-            availableTimeSlotsList.removeAll { it.isOccupied(reservation.timeSlot) }
+            timeSlotsList.forEach { thatTimeSlot ->
+                if (thatTimeSlot.isOccupiedBy(reservation.timeSlot)) {
+                    thatTimeSlot.available = false
+                }
+                // Additionally: if time difference > 85, we can stop the for loop
+                // but we have limited timeSlot here so...
+            }
         }
+        // based on our nav flow, we don't need to update timeSlots availability immediately
         return result
     }
 
-    override fun getAvailableTimeSlots(): List<TimeSlot> {
-        return availableTimeSlotsList
+    override fun getTimeSlots(): List<TimeSlot> {
+        return timeSlotsList
     }
 
 }

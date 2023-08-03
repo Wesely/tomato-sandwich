@@ -10,12 +10,6 @@ import tw.wesley.tomatosandwich.R
 import tw.wesley.tomatosandwich.databinding.FragmentViewDetailsBinding
 import tw.wesley.tomatosandwich.model.Reservation
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-
 class ViewDetailsFragment : Fragment() {
 
     private var _binding: FragmentViewDetailsBinding? = null
@@ -31,7 +25,7 @@ class ViewDetailsFragment : Fragment() {
             with(binding) {
                 tvGuestName.text = reservation.guestName
                 tvPartySize.text = getString(R.string.party_size_format, reservation.partySize)
-                tvTime.text = getString(R.string.time_details_format, reservation.timeSlot.toString())
+                tvTime.text = getString(R.string.time_details_format, reservation.timeSlot.toFormattedTimeString())
                 tvPhone.text = reservation.phone
                 tvVisitNotes.text = reservation.notes
                 btnClose.setOnClickListener {

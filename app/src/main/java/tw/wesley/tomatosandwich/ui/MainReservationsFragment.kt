@@ -37,7 +37,7 @@ class MainReservationsFragment : Fragment() {
 
         binding.btnCreate.setOnClickListener {
             // action to start reservation
-            findNavController().navigate(R.id.action_start_create_reservation)
+            findNavController().navigate(R.id.actionMainToTimeSelection)
         }
 
         // Initialize the RecyclerView

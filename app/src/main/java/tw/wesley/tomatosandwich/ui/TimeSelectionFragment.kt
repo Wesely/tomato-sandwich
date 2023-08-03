@@ -41,7 +41,7 @@ class TimeSelectionFragment : Fragment() {
         // Initialize the adapter
         timeSlotAdapter = TimeSlotAdapter(listOf()) { timeSlot ->
             viewModel.timeSlot = timeSlot
-            findNavController().navigate(R.id.action_time_to_party_size)
+            findNavController().navigate(R.id.actionTimeSelectionToPartySize)
         }
 
         // Set the RecyclerView's layout manager and adapter

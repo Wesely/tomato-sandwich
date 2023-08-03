@@ -39,7 +39,7 @@ class CreateReservationViewModel @Inject constructor(
     }
 
     private fun fetchAvailableTimeSlots() {
-        val availableTimeSlots = reservationRepository.getAvailableTimeSlots()
+        val availableTimeSlots = reservationRepository.getTimeSlots()
         _availableTimeSlotsFlow.value = availableTimeSlots
     }
 

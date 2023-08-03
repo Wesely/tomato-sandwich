@@ -63,7 +63,7 @@ class PartySizeSelectionFragment : Fragment() {
 
     private fun onPartySizeSelected(partySize: Int) {
         viewModel.partySize = partySize
-        findNavController().navigate(R.id.action_party_size_to_details)
+        findNavController().navigate(R.id.actionPartySizeToDetails)
     }
 
     override fun onDestroyView() {

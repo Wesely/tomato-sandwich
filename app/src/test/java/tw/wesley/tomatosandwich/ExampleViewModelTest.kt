@@ -20,6 +20,7 @@ import org.junit.Test
 import tw.wesley.tomatosandwich.model.Reservation
 import tw.wesley.tomatosandwich.model.TimeSlot
 import tw.wesley.tomatosandwich.repos.IReservationRepository
+import tw.wesley.tomatosandwich.viewmodels.CreateReservationViewModel
 import tw.wesley.tomatosandwich.viewmodels.ReservationViewModel
 
 /**
@@ -36,17 +37,18 @@ class ReservationViewModelTest {
     val coroutineTestRule = CoroutineTestRule()  // Helps with managing coroutines in tests
 
     private lateinit var viewModel: ReservationViewModel  // ViewModel to be tested
+    private lateinit var createReservationViewModel: CreateReservationViewModel  // ViewModel to be tested
     private val mockRepo = mockk<IReservationRepository>()  // Mocked repository
 
     private val testScope = TestCoroutineScope()  // Scope for launching coroutines in tests
 
     // Mocked data set, pretend there's already an reservation
-    private val mockData = MutableStateFlow(setOf(Reservation(TimeSlot(2000, false), "First Guest", 5)))
+    private val mockData = MutableStateFlow(listOf(Reservation(TimeSlot(2000, false), 5, "First Guest")))
 
     @Before
     fun setup() {
         every { mockRepo.getReservationsFlow() } returns mockData  // Setup mock repository to return mock data
-        every { mockRepo.getAvailableTimeSlots() } returns IReservationRepository.INIT_TIME_SLOTS  // Default timeslots
+        every { mockRepo.getTimeSlots() } returns IReservationRepository.INIT_TIME_SLOTS  // Default timeslots
         coEvery { mockRepo.addReservation(any()) } answers {
             mockData.value = mockData.value + firstArg<Reservation>()  // Update mock data when a reservation is added
             true
@@ -54,6 +56,7 @@ class ReservationViewModelTest {
 
         // Create ViewModel to be tested with mocked repository
         viewModel = ReservationViewModel(mockRepo)
+        createReservationViewModel = CreateReservationViewModel(mockRepo)
     }
 
     @After
@@ -61,16 +64,27 @@ class ReservationViewModelTest {
         testScope.cancel()  // Clean up any active coroutines
     }
 
+    /**
+     * If I add a reservation from [CreateReservationViewModel]
+     * [ReservationViewModel] shall also got the updated flow
+     */
     @Test
     fun addReservation_ShouldUpdateFlow() = runTest {
-        val newReservation = Reservation(TimeSlot(2030, false), "Second Guest", 2)  // New reservation to be added
+        val newReservation = Reservation(TimeSlot(2030, false), 2, "Second Guest")  // New reservation to be added
 
-        var flowContent: Set<Reservation>? = null
+        var flowContent: List<Reservation>? = null
         val job = launch {
             viewModel.reservationFlow.collect { flowContent = it }
         }
 
-        viewModel.addReservation(newReservation)  // Add the new reservation
+        with(createReservationViewModel) {
+            timeSlot = newReservation.timeSlot
+            partySize = newReservation.partySize
+            guestName = newReservation.guestName
+            notes = newReservation.notes
+            phone = newReservation.phone
+            addReservation()// Add the new reservation
+        }
 
         coVerify { mockRepo.addReservation(newReservation) }  // Verify that addReservation method was called
 

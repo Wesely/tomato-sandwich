@@ -9,7 +9,7 @@
         android:name="tw.wesley.tomatosandwich.ui.MainReservationsFragment"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_start_create_reservation"
+            android:id="@+id/actionMainToTimeSelection"
             app:destination="@id/timeSelectionFragment" />
 
         <action
@@ -25,9 +25,6 @@
         android:id="@+id/ViewDetailsFragment"
         android:name="tw.wesley.tomatosandwich.ui.ViewDetailsFragment"
         tools:layout="@layout/fragment_view_details">
-        <action
-            android:id="@+id/actionDetailsToMainFragment"
-            app:destination="@id/mainReservationFragment" />
     </fragment>
 
     <fragment
@@ -35,7 +32,7 @@
         android:name="tw.wesley.tomatosandwich.ui.TimeSelectionFragment"
         tools:layout="@layout/fragment_time_selection">
         <action
-            android:id="@+id/action_time_to_party_size"
+            android:id="@+id/actionTimeSelectionToPartySize"
             app:destination="@id/partySizeFragment" />
     </fragment>
 
@@ -44,7 +41,7 @@
         android:name="tw.wesley.tomatosandwich.ui.PartySizeSelectionFragment"
         tools:layout="@layout/fragment_party_size">
         <action
-            android:id="@+id/action_party_size_to_details"
+            android:id="@+id/actionPartySizeToDetails"
             app:destination="@id/detailsInputFragment" />
     </fragment>
 
