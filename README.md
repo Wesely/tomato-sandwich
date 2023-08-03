@@ -39,7 +39,8 @@ Some of them might not used in the end.
   - But for simplicity, I'll use `SortedSet<Reservation>` here. Since it can't duplicate and needs to be sorted by time, it's an interesting choice.
 - Reservations last for an hour:
   - We assume we don't need to clean the table.
-  - I came up with a fun implementation, which is to store the time "03:30 PM" as "Integer(1530)". It would make calculating the time difference easy.
+  - Actually, I know I can just store them as String, and for each timeSlot is booked, mark the 3 slot ahead and 3 slot after as not available.
+  - But I came up with a fun implementation, which is to store the time "03:30 PM" as "Integer(1530)". It would make calculating the time difference easy.
   - By doing this, I can use `(time - other.time) >= 0 && (time - other.time) <= 85` to check if it's occupied by another reservation. This 85 stands
     for `1 hour minus 15 minutes => 100 -15 = 85`.
   - It's tested in `fun testIsOccupiedBy()` and works fine.
