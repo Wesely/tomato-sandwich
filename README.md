@@ -1,14 +1,18 @@
 # Tomato-Sandwich
 
+Github repo:
+Link: https://github.com/Wesely/tomato-sandwich
+SSH:  `git@github.com:Wesely/tomato-sandwich.git`
+
+Thank you for taking your time to review this project :)
+
+I uphold the spirit of "keeping it simple". When encountering complex logic, I skip it for the time being and jot it down in the **Misc** section at the end of this document.
+Sometimes, I opt for a more humorous approach. :)
+
 Web version of this documentation? Check it out [here](https://gist.github.com/Wesely/9fb49128862abc22603641a78eec64e0).
 
 I use a GitHub project to make my plans. They're not very detailed but I've included previews in each step. Check out the
 project [here](https://github.com/users/Wesely/projects/3/views/1).
-
-I uphold the spirit of "keeping it simple". When encountering complex logic, I skip it for the time being and jot it down in the **Misc** section at the end of this document.
-Sometimes, I opt for a more humorous approach. :)
-ncountering complex logic, I skip it for now and write it down in the **Misc** section at the end of this document.
-And sometimes I chose the more funny one :)
 
 ## Setup
 
@@ -16,6 +20,7 @@ Example Image: ![Image](https://i.imgur.com/McdsYZo.png)
 
 1. Match the Java version in AndroidStudio. Go to Settings and search for `Gradle`.
 2. Under `Gradle`, set the `Gradle JDK` to Java 17 (example: `jbr-17`).
+3. Currently can build with Android Studio > Build > Build APK
 
 ## Basic Architecture
 
@@ -63,4 +68,4 @@ Some of them might not used in the end.
 - I could have used TextSpan to make the Reservation Details look better, but I didn't.
 - I'm not setting all dimensions to `dimens.xml`.
 - Wanted to import some `viewBinding` delegates so I don't have to clean them up.
-- 
+
