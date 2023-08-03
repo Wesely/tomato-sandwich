@@ -28,3 +28,4 @@
 - Looked into `attr` and picked some colors as Theme. But not gonna check if it's working properly this time, haha.
 - I should go with `notifyItemRangeChanged()` not `notifyDataSetChanged()`
 - For the PartySize, there are only 5 buttons so I programmatically generate 5 Button and put them into the ScrollView
+- User `Timber.d()` to print logs only on debug builds

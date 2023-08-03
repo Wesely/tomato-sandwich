@@ -1,7 +1,6 @@
 package tw.wesley.tomatosandwich.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import tw.wesley.tomatosandwich.R
 import tw.wesley.tomatosandwich.databinding.FragmentMainBinding
 import tw.wesley.tomatosandwich.viewmodels.ReservationViewModel
@@ -37,7 +37,7 @@ class MainReservationsFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.reservationFlow.collectLatest {
-                Log.d("subscribe/resvFlow", it.toString())
+                Timber.d("subscribe/resvFlow:$it")
             }
         }
 

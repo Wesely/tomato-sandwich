@@ -1,7 +1,6 @@
 package tw.wesley.tomatosandwich.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,16 +35,13 @@ class DetailsInputFragment : Fragment() {
                 viewModel.addReservation()
                 findNavController().navigate(R.id.actionFinishCreateReservation)
             }
-            textInputEditTextName.doOnTextChanged { text, start, before, count ->
-                Log.d("textInputEditTextName", "doOnTextChanged/$text")
+            textInputEditTextName.doOnTextChanged { text, _, _, _ ->
                 viewModel.guestName = text.toString()
             }
-            textInputEditTextPhone.doOnTextChanged { text, start, before, count ->
-                Log.d("textInputEditTextPhone", "doOnTextChanged/$text")
+            textInputEditTextPhone.doOnTextChanged { text, _, _, _ ->
                 viewModel.phone = text.toString()
             }
-            textInputEditTextNotes.doOnTextChanged { text, start, before, count ->
-                Log.d("textInputEditTextNotes", "doOnTextChanged/$text")
+            textInputEditTextNotes.doOnTextChanged { text, _, _, _ ->
                 viewModel.notes = text.toString()
             }
         }
